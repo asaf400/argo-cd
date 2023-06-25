@@ -19,7 +19,6 @@ import (
 	"github.com/argoproj/gitops-engine/pkg/health"
 	synccommon "github.com/argoproj/gitops-engine/pkg/sync/common"
 	"github.com/ghodss/yaml"
-	"github.com/robfig/cron/v3"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -34,6 +33,7 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/clientcmd/api"
 
+	"github.com/argoproj-labs/argocd-image-updater/pkg/argocd"
 	"github.com/argoproj/argo-cd/v2/common"
 	"github.com/argoproj/argo-cd/v2/util/collections"
 	"github.com/argoproj/argo-cd/v2/util/helm"
@@ -865,6 +865,8 @@ var (
 	ResourceHealthLocationInline  ResourceHealthLocation = ""
 	ResourceHealthLocationAppTree ResourceHealthLocation = "appTree"
 )
+
+type ImageUpdaterHistories []argocd.ChangeEntry
 
 // ApplicationStatus contains status information for the application
 type ApplicationStatus struct {
